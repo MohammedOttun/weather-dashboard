@@ -19,7 +19,7 @@ This weather dashboard runs in the browser.
 * Deployment Site:
 
 ## How to use:
-* Go to [Application url]()
+* Go to [Application](https://mohammedottun.github.io/weather-dashboard/)
 * Enter a city name on the 'Enter City name' field.
 * Click on the search icon
 * Weather data should be provided for today on the right-hand side of the page.
