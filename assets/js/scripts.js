@@ -5,11 +5,14 @@ var lon;
 var lat;
 var city;
 
-// get city name
+var searchHistory = []; // Search History array
 
+// get city name
 function getCity() { 
     cityInput = document.querySelector('#inputCity').value;
-    city = cityInput
+    city = cityInput;
+
+    cacheSearchData();
 
     getCurrentWeather(city);
     getFiveDayWeather(city);
@@ -17,10 +20,13 @@ function getCity() {
 
  };
 
+ function cacheSearchData() {
+    searchHistory.push(city);
+    console.log(searchHistory);
+ }
 
 function getCurrentWeather(city) {
-
-    var endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
+    var endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=imperial`;
     
     fetch(endpoint)
         .then(function (response) {
@@ -45,8 +51,7 @@ function getCurrentWeather(city) {
 
 
 function getFiveDayWeather(city) {
-
-    var endpoint = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}`;
+    var endpoint = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=imperial`;
 
     fetch(endpoint)
         .then(function (response) {
@@ -60,8 +65,7 @@ function getFiveDayWeather(city) {
 
 // Get city coordinates
 function getCurrentUVIndex(city) {
-
-    var endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
+    var endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=imperial`;
 
     fetch(endpoint)
         .then(function (response) {
@@ -73,7 +77,9 @@ function getCurrentUVIndex(city) {
             lat = data.coord.lat;
 
             // Get current UV Index
-            fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=daily,hourly,minutely,alerts&appid=${API_KEY}`)
+            var endpoint = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=daily,hourly,minutely,alerts&appid=${API_KEY}&units=imperial`
+            
+            fetch(endpoint)
             .then(function (response) {
                 return response.json();
             })
