@@ -7,6 +7,8 @@ var city;
 
 var searchHistory = []; // Search History array
 
+var cardEl = document.getElementById('#featured-card');
+
 // get city name
 function getCity() { 
     cityInput = document.querySelector('#inputCity').value;
@@ -33,17 +35,34 @@ function getCurrentWeather(city) {
             return response.json();
         })
         .then(function (data) {
+        
+        //create day weather card
+        var cardBodyEl = document.createElement('div');
+        cardBodyEl.classList.add('card-body');
 
-        // // City + Date
-        // var city = data.name;
+        var cardTitleEl = document.createElement('h4');
+        cardTitleEl.classList.add('card-title');
+        cardTitleEl.textContent = `${data.name}`;
 
-        // // Temperature
-        // var temperatue = data.main.temp;
+        var cardTempEl = document.createElement('p');
+        cardTempEl.classList.add('card-text');
+        cardTempEl.textContent = `Temperature: ${data.main.temp}`;
 
-        // // Humidity
-        // var humidity = data.main.humidity
+        var cardHumEl = document.createElement('p');
+        cardHumEl.classList.add('card-text');
+        cardHumEl.textContent = `Humidity: ${data.main.humidity}`;
 
-        // // UV Index
+        cardEl.appendChild(cardBodyEl);
+        cardBodyEl.appendChild(cardTitleEl);
+        cardBodyEl.appendChild(cardTempEl);
+        cardBodyEl.appendChild(cardHumEl);
+
+        // Weather condition
+        var icon = data.weather.icon; 
+
+        // UV Index
+
+
             console.log("getCurrentWeather ↓");
             console.log(data);
         });
@@ -77,13 +96,18 @@ function getCurrentUVIndex(city) {
             lat = data.coord.lat;
 
             // Get current UV Index
-            var endpoint = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=daily,hourly,minutely,alerts&appid=${API_KEY}&units=imperial`
+            var endpoint = `http://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${lat}&lon=${lon}&exclude=daily,hourly,minutely,alerts&appid=${API_KEY}&units=imperial`
             
             fetch(endpoint)
             .then(function (response) {
                 return response.json();
             })
             .then(function (UV_data) {
+
+                // var cardUVIndexEl = document.createElement('p');
+                // cardUVIndexEl.classList.add('card-text');
+                // cardBodyEl.appendChild(cardUVIndexEl);
+                // cardHumEl.textContent = `Humidity: ${data.main.humidity}`;
                 
             console.log("getCurrentUVIndex ↓");
             console.log(data);
