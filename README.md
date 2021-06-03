@@ -15,8 +15,8 @@ This weather dashboard runs in the browser.
 * Multi-City weather data by using local browser storage.
 
 ## Application Details:
-* Git Repo: 
-* Deployment Site:
+* Git Repo: https://github.com/MohammedOttun/weather-dashboard
+* Deployment Site: https://mohammedottun.github.io/weather-dashboard/
 
 ## How to use:
 * Go to [Application](https://mohammedottun.github.io/weather-dashboard/)
